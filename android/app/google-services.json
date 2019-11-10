@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "project_number": "968949713477",
+    "firebase_url": "https://tennisaidroid-1526066885073.firebaseio.com",
+    "project_id": "tennisaidroid-1526066885073",
+    "storage_bucket": "tennisaidroid-1526066885073.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968949713477:android:c07460266bf323a6c7312c",
+        "android_client_info": {
+          "package_name": "com.orunmila.raqet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968949713477-8031h2onrimj49o8i3lq99otfdrgvfcg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.orunmila.raqet",
+            "certificate_hash": "4e55bb347e2ac1df5fa2894cfde652a622f7611d"
+          }
+        },
+        {
+          "client_id": "968949713477-iofbgo6h5ngk25cp9kbn3juilp01datr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0sAgbVvK7OWvC2k8-5a519GBNxKEnN7k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968949713477-iofbgo6h5ngk25cp9kbn3juilp01datr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968949713477:android:b4c140c0f9a299cbc7312c",
+        "android_client_info": {
+          "package_name": "com.orunmila.tennisai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968949713477-7khdoadgmbsguhmfupbvqbqg2rhobfb5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.orunmila.tennisai",
+            "certificate_hash": "df336ad36cbdf31c041fe1c7c3c4a0a8e3e312b2"
+          }
+        },
+        {
+          "client_id": "968949713477-iofbgo6h5ngk25cp9kbn3juilp01datr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0sAgbVvK7OWvC2k8-5a519GBNxKEnN7k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968949713477-iofbgo6h5ngk25cp9kbn3juilp01datr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968949713477:android:31ce81542aa15b47",
+        "android_client_info": {
+          "package_name": "com.orunmila.tennisai_public"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968949713477-doa40k8i8sanhl6k9u4vs7j8lt60vufa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.orunmila.tennisai_public",
+            "certificate_hash": "4e55bb347e2ac1df5fa2894cfde652a622f7611d"
+          }
+        },
+        {
+          "client_id": "968949713477-iofbgo6h5ngk25cp9kbn3juilp01datr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0sAgbVvK7OWvC2k8-5a519GBNxKEnN7k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968949713477-iofbgo6h5ngk25cp9kbn3juilp01datr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
