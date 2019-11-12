@@ -5,9 +5,9 @@ import 'package:raqet/redux/auth/settings_state.dart';
 part 'app_state.g.dart';
 
 abstract class AppState implements Built<AppState, AppStateBuilder> {
-  factory AppState() {
+  factory AppState({bool isTesting}) {
     return _$AppState._(
-        isLoading: false, isSaving: false, settingsState: SettingsState());
+        isLoading: false, isSaving: false, isTesting: false, settingsState: SettingsState());
   }
 
   AppState._();
@@ -15,6 +15,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   SettingsState get settingsState;
   bool get isLoading;
   bool get isSaving;
+  bool get isTesting;
 
   //factory AppState([void updates(AppStateBuilder b)]) = _$AppState;
 

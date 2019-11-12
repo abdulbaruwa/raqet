@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:raqet/data/repositories/file_storate.dart';
@@ -8,18 +10,25 @@ import 'package:raqet/redux/app/app_reducer.dart';
 import 'package:raqet/redux/app/app_state.dart';
 import 'package:raqet/redux/auth/auth_middleware.dart';
 import 'package:redux/redux.dart';
+import 'package:redux_logging/redux_logging.dart';
 
-Future main() async {
+Future main({bool isTesting = false}) async {
   var repository = const PersistenceRepository(
       fileStorage:
           FileStorage('settings_state', getApplicationDocumentsDirectory));
+  
   var settings = await repository.loadSettingsState();
 
   final store = Store<AppState>(appReducer,
-      initialState: AppState(),
+      initialState: AppState(isTesting: isTesting),
       middleware: []
         ..addAll(createStoreAuthMiddleware())
         ..addAll(createStorePersistentMiddleware())
-        );
+        ..addAll(isTesting
+            ? []
+            : [
+                LoggingMiddleware<dynamic>.printer(
+                    formatter: LoggingMiddleware.multiLineFormatter)
+              ]));
   runApp(RaqetApp(store: store));
 }

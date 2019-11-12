@@ -27,6 +27,9 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       'isSaving',
       serializers.serialize(object.isSaving,
           specifiedType: const FullType(bool)),
+      'isTesting',
+      serializers.serialize(object.isTesting,
+          specifiedType: const FullType(bool)),
     ];
 
     return result;
@@ -55,6 +58,10 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
           result.isSaving = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
+        case 'isTesting':
+          result.isTesting = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
       }
     }
 
@@ -69,11 +76,14 @@ class _$AppState extends AppState {
   final bool isLoading;
   @override
   final bool isSaving;
+  @override
+  final bool isTesting;
 
   factory _$AppState([void Function(AppStateBuilder) updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
-  _$AppState._({this.settingsState, this.isLoading, this.isSaving})
+  _$AppState._(
+      {this.settingsState, this.isLoading, this.isSaving, this.isTesting})
       : super._() {
     if (settingsState == null) {
       throw new BuiltValueNullFieldError('AppState', 'settingsState');
@@ -83,6 +93,9 @@ class _$AppState extends AppState {
     }
     if (isSaving == null) {
       throw new BuiltValueNullFieldError('AppState', 'isSaving');
+    }
+    if (isTesting == null) {
+      throw new BuiltValueNullFieldError('AppState', 'isTesting');
     }
   }
 
@@ -99,13 +112,16 @@ class _$AppState extends AppState {
     return other is AppState &&
         settingsState == other.settingsState &&
         isLoading == other.isLoading &&
-        isSaving == other.isSaving;
+        isSaving == other.isSaving &&
+        isTesting == other.isTesting;
   }
 
   @override
   int get hashCode {
-    return $jf($jc($jc($jc(0, settingsState.hashCode), isLoading.hashCode),
-        isSaving.hashCode));
+    return $jf($jc(
+        $jc($jc($jc(0, settingsState.hashCode), isLoading.hashCode),
+            isSaving.hashCode),
+        isTesting.hashCode));
   }
 
   @override
@@ -113,7 +129,8 @@ class _$AppState extends AppState {
     return (newBuiltValueToStringHelper('AppState')
           ..add('settingsState', settingsState)
           ..add('isLoading', isLoading)
-          ..add('isSaving', isSaving))
+          ..add('isSaving', isSaving)
+          ..add('isTesting', isTesting))
         .toString();
   }
 }
@@ -135,6 +152,10 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   bool get isSaving => _$this._isSaving;
   set isSaving(bool isSaving) => _$this._isSaving = isSaving;
 
+  bool _isTesting;
+  bool get isTesting => _$this._isTesting;
+  set isTesting(bool isTesting) => _$this._isTesting = isTesting;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
@@ -142,6 +163,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _settingsState = _$v.settingsState?.toBuilder();
       _isLoading = _$v.isLoading;
       _isSaving = _$v.isSaving;
+      _isTesting = _$v.isTesting;
       _$v = null;
     }
     return this;
@@ -168,7 +190,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
           new _$AppState._(
               settingsState: settingsState.build(),
               isLoading: isLoading,
-              isSaving: isSaving);
+              isSaving: isSaving,
+              isTesting: isTesting);
     } catch (_) {
       String _$failedField;
       try {
