@@ -56,11 +56,11 @@ class LandingState extends State<LoginView> {
         body: new Row(children: <Widget>[
           new Expanded(
               child: new Container(
-                  color: Colors.indigo,
+                  color: Colors.orange,
                   child: new Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      new Text('Tennis.Ai',
+                      new Text('RAQET',
                           style: Theme.of(context)
                               .accentTextTheme
                               .display1
@@ -72,7 +72,7 @@ class LandingState extends State<LoginView> {
                                     Container(padding: const EdgeInsets.only(bottom: 10 ),
                                       child: Text('Welcome',style:TextStyle(fontSize:30,color: Colors.white,))),
                                     Container(padding: const EdgeInsets.only(top: 10, bottom: 10 ),
-                                      child: Text("You're only a few steps away from joining Tennis.Ai",style:TextStyle(fontSize:16,color: Colors.white,))),
+                                      child: Text("You're only a few steps away from joining RAQET",style:TextStyle(fontSize:16,color: Colors.white,))),
                       AnimatedOpacity(
                           opacity: _visible ? 1.0 : 0.0,
                           duration: Duration(milliseconds: 500),
@@ -92,7 +92,8 @@ class LandingState extends State<LoginView> {
                                         child: Row(children: <Widget>[
                                           Expanded(
                                               child: RaisedButton(
-                                                  onPressed: widget.isSignedIn == false ? widget.onGoogleSignInSelected : null,
+                                                  // onPressed: widget.isSignedIn == false ? widget.onGoogleSignInSelected : null,
+                                                  onPressed:() {print('Goolge Auth');}, // widget.isSignedIn == false ? widget.onEmailSignInSelected : null,
                                                   child: Padding(
                                                     padding: const EdgeInsets
                                                         .fromLTRB(0, 10, 0, 10),
@@ -125,7 +126,7 @@ class LandingState extends State<LoginView> {
                                         padding: const EdgeInsets.only(
                                             left: 10, right: 10),
                                         child: RaisedButton(
-                                        onPressed: widget.isSignedIn == false ? widget.onEmailSignInSelected : null,
+                                        onPressed:() {print('Email Auth');}, // widget.isSignedIn == false ? widget.onEmailSignInSelected : null,
                                         //  onPressed: () {
                                         //   Navigator.push(context, new MaterialPageRoute(
                                         //       builder: (BuildContext context) => new EmailSignUp()));
