@@ -93,7 +93,7 @@ class LandingState extends State<LoginView> {
                                           Expanded(
                                               child: RaisedButton(
                                                   // onPressed: widget.isSignedIn == false ? widget.onGoogleSignInSelected : null,
-                                                  onPressed:() {print('Goolge Auth');}, // widget.isSignedIn == false ? widget.onEmailSignInSelected : null,
+                                                  onPressed:() {print('Email Auth');}, // widget.isSignedIn == false ? widget.onEmailSignInSelected : null,
                                                   child: Padding(
                                                     padding: const EdgeInsets
                                                         .fromLTRB(0, 10, 0, 10),
@@ -126,7 +126,8 @@ class LandingState extends State<LoginView> {
                                         padding: const EdgeInsets.only(
                                             left: 10, right: 10),
                                         child: RaisedButton(
-                                        onPressed:() {print('Email Auth');}, // widget.isSignedIn == false ? widget.onEmailSignInSelected : null,
+                                        // onPressed:() {print('Email Auth');}, 
+                                        onPressed: widget.onEmailSignInSelected,
                                         //  onPressed: () {
                                         //   Navigator.push(context, new MaterialPageRoute(
                                         //       builder: (BuildContext context) => new EmailSignUp()));

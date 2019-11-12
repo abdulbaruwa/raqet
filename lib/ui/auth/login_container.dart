@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:raqet/redux/app/app_state.dart';
+import 'package:raqet/redux/auth/auth_actions.dart';
 import 'package:raqet/ui/auth/login_view.dart';
 import 'package:redux/redux.dart';
 
@@ -43,7 +44,7 @@ class _ViewModel {
   static _ViewModel fromStore(Store<AppState> store) {
     return new _ViewModel(onEmailSignUpSelected: () {
       print('auth_container.viewModel: ShowSignUpAction');
-      // store.dispatch(NavigateToEmailSignUpAction());
+      store.dispatch(NavigateToEmailSignUpAction());
     }, onGoogleSignInSelected: () async {
       print('auth_container.viewModel: Google Sign in selected');
       try {

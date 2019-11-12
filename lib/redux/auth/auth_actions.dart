@@ -21,3 +21,7 @@ class LoadStateSuccess {
 
   final AppState state;
 }
+
+class NavigateToEmailSignUpAction{}
+
+class NavigateToEmailSignInAction{}
