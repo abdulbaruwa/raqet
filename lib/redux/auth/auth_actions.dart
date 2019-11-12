@@ -16,7 +16,6 @@ class LoadUserLogin {
   final BuildContext context;
 }
 
-
 class LoadStateSuccess {
   LoadStateSuccess(this.state);
 

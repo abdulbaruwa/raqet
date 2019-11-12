@@ -27,6 +27,7 @@ dependencies:
   # redux
   redux: ^3.0.0
   flutter_redux: ^0.5.3
+  redux_logging: ^0.3.0
   
   built_value: ^6.6.0
   built_collection: ^4.2.2
@@ -71,9 +72,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
     # - images/
-    # - assets/
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
