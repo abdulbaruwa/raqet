@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:raqet/data/models/email_sign_up_Info.dart';
 
 class SignInView extends StatelessWidget {
@@ -7,8 +6,10 @@ class SignInView extends StatelessWidget {
   final TextEditingController _email = new TextEditingController();
   final TextEditingController _password = new TextEditingController();
   final Function(EmailSignUpInfo signInInfo) onSignIn;
+  final Function onEmailSignUpSelected;
+  final Function onPasswordResetSelected;
 
-  SignInView({Key key, this.onSignIn}) : super(key: key);
+  SignInView({Key key, this.onSignIn, this.onEmailSignUpSelected, this.onPasswordResetSelected}) : super(key: key);
 
   final bool _autoValidate = false;
   final bool _loadingVisible = false;
@@ -91,9 +92,7 @@ class SignInView extends StatelessWidget {
         'Forgot password?',
         style: TextStyle(color: Colors.black54),
       ),
-      onPressed: () {
-        Navigator.pushNamed(context, '/forgot-password');
-      },
+      onPressed: () => onPasswordResetSelected(context),
     );
 
     final signUpLabel = FlatButton(
@@ -101,9 +100,7 @@ class SignInView extends StatelessWidget {
         'Create an Account',
         style: TextStyle(color: Colors.black54),
       ),
-      onPressed: () {
-        Navigator.pushNamed(context, '/signup');
-      },
+      onPressed: () => onEmailSignUpSelected(context),
     );
 
     return Scaffold(

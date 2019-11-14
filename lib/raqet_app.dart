@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:raqet/redux/app/app_state.dart';
 import 'package:raqet/ui/app/app_builder.dart';
+import 'package:raqet/ui/auth/forgot_password_container.dart';
 import 'package:raqet/ui/auth/init_screen.dart';
 import 'package:raqet/ui/auth/login_container.dart';
 import 'package:raqet/ui/auth/sign_in_container.dart';
@@ -46,7 +47,8 @@ class _RaqetAppState extends State<RaqetApp>{
             SignUpContainer.route:(context){
               return SignUpContainer();
             },
-            SignInContainer.route:(context) => SignInContainer()
+            SignInContainer.route:(context) => SignInContainer(),
+            ForgotPasswordContainer.route:(context) => ForgotPasswordContainer()
           },
         );
       }),

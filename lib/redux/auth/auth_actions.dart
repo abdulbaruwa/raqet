@@ -32,3 +32,9 @@ class NavigateToEmailSignInAction {
 
   final BuildContext context;
 }
+
+class NavigateToPasswordResetAction {
+  NavigateToPasswordResetAction(this.context);
+
+  final BuildContext context;
+}
