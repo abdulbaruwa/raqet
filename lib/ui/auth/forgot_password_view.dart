@@ -9,7 +9,9 @@ class ForgotPasswordView extends StatelessWidget {
   static final route = '/signin';
   final bool _autoValidate = false;
 
-  ForgotPasswordView({Key key, this.onRenewPassword, this.onEmailSignInSelected}) : super(key: key);
+  ForgotPasswordView(
+      {Key key, this.onRenewPassword, this.onEmailSignInSelected})
+      : super(key: key);
 
   Widget build(BuildContext context) {
     final logo = Hero(
@@ -51,7 +53,11 @@ class ForgotPasswordView extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        onPressed: () => onRenewPassword(context),
+        onPressed: () {
+          if (_formKey.currentState.validate()) {
+            onRenewPassword(context);
+          }
+        },
         padding: EdgeInsets.all(12),
         color: Theme.of(context).primaryColor,
         child: Text('FORGOT PASSWORD', style: TextStyle(color: Colors.white)),
@@ -59,12 +65,11 @@ class ForgotPasswordView extends StatelessWidget {
     );
 
     final signInLabel = FlatButton(
-      child: Text(
-        'Sign In',
-        style: TextStyle(color: Colors.black54),
-      ),
-      onPressed: () => onEmailSignInSelected(context)
-    );
+        child: Text(
+          'Sign In',
+          style: TextStyle(color: Colors.black54),
+        ),
+        onPressed: () => onEmailSignInSelected(context));
 
     return Scaffold(
         backgroundColor: Colors.white,

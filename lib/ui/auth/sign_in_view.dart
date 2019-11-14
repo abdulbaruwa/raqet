@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:raqet/data/models/email_sign_up_Info.dart';
+import 'package:raqet/utils/validator.dart';
 
 class SignInView extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -9,7 +10,12 @@ class SignInView extends StatelessWidget {
   final Function onEmailSignUpSelected;
   final Function onPasswordResetSelected;
 
-  SignInView({Key key, this.onSignIn, this.onEmailSignUpSelected, this.onPasswordResetSelected}) : super(key: key);
+  SignInView(
+      {Key key,
+      this.onSignIn,
+      this.onEmailSignUpSelected,
+      this.onPasswordResetSelected})
+      : super(key: key);
 
   final bool _autoValidate = false;
   final bool _loadingVisible = false;
@@ -34,6 +40,7 @@ class SignInView extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       controller: _email,
+      validator: Validator.validateEmail,
       decoration: InputDecoration(
         prefixIcon: Padding(
           padding: EdgeInsets.only(left: 5.0),
@@ -52,6 +59,7 @@ class SignInView extends StatelessWidget {
       autofocus: false,
       obscureText: true,
       controller: _password,
+      validator: Validator.validatePassword,
       decoration: InputDecoration(
         prefixIcon: Padding(
           padding: EdgeInsets.only(left: 5.0),
@@ -73,13 +81,14 @@ class SignInView extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          var emailSignIn = new EmailSignUpInfo(
-              email: _email.text,
-              password: _password.text);
+          if (_formKey.currentState.validate()) {
+            var emailSignIn = new EmailSignUpInfo(
+                email: _email.text, password: _password.text);
 
-          this.onSignIn(emailSignIn);
+            this.onSignIn(emailSignIn);
 
-          // _emailLogin(email: _email.text, password: _password.text, context: context);
+            // _emailLogin(email: _email.text, password: _password.text, context: context);
+          }
         },
         padding: EdgeInsets.all(12),
         color: Theme.of(context).primaryColor,
@@ -106,34 +115,33 @@ class SignInView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-          child: Form(
-            key: _formKey,
-            autovalidate: _autoValidate,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      logo,
-                      SizedBox(height: 48.0),
-                      email,
-                      SizedBox(height: 24.0),
-                      password,
-                      SizedBox(height: 12.0),
-                      loginButton,
-                      forgotLabel,
-                      signUpLabel
-                    ],
-                  ),
+        child: Form(
+          key: _formKey,
+          autovalidate: _autoValidate,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    logo,
+                    SizedBox(height: 48.0),
+                    email,
+                    SizedBox(height: 24.0),
+                    password,
+                    SizedBox(height: 12.0),
+                    loginButton,
+                    forgotLabel,
+                    signUpLabel
+                  ],
                 ),
               ),
             ),
           ),
-          ),
+        ),
+      ),
     );
   }
-
 }

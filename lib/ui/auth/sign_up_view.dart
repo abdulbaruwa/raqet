@@ -53,6 +53,7 @@ class SignUpView extends StatelessWidget {
       autofocus: false,
       obscureText: true,
       controller: _password,
+      validator: Validator.validatePassword,
       decoration: InputDecoration(
         prefixIcon: Padding(
           padding: EdgeInsets.only(left: 5.0),
@@ -74,12 +75,13 @@ class SignUpView extends StatelessWidget {
           borderRadius: BorderRadius.circular(24),
         ),
         //  onPressed: () {},
-        onPressed: (){
-          var emailSignUp = new EmailSignUpInfo(
-              email: _email.text,
-              password: _password.text);
+        onPressed: () {
+          if (_formKey.currentState.validate()) {
+            var emailSignUp = new EmailSignUpInfo(
+                email: _email.text, password: _password.text);
 
-          this.onSignUp(emailSignUp, context);
+            this.onSignUp(emailSignUp, context);
+          }
         },
         padding: EdgeInsets.all(12),
         color: Theme.of(context).primaryColor,
@@ -100,32 +102,32 @@ class SignUpView extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Container(
-          child: Form(
-            key: _formKey,
-            autovalidate: _autoValidate,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Center(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      logo,
-                      SizedBox(height: 48.0),
-                      email,
-                      SizedBox(height: 24.0),
-                      password,
-                      SizedBox(height: 12.0),
-                      signUpButton,
-                      signInLabel
-                    ],
-                  ),
+        child: Form(
+          key: _formKey,
+          autovalidate: _autoValidate,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    logo,
+                    SizedBox(height: 48.0),
+                    email,
+                    SizedBox(height: 24.0),
+                    password,
+                    SizedBox(height: 12.0),
+                    signUpButton,
+                    signInLabel
+                  ],
                 ),
               ),
             ),
           ),
-          ),
+        ),
+      ),
     );
   }
 }
