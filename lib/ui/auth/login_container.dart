@@ -29,7 +29,8 @@ class LoginContainer extends StatelessWidget {
         builder: (context, vm) {
           return new LoginView(
             onGoogleSignInSelected: vm.onGoogleSignInSelected,
-            onEmailSignInSelected: vm.onEmailSignUpSelected,
+            onEmailSignUpSelected: vm.onEmailSignUpSelected,
+            onEmailSignInSelected: vm.onEmailSignInSelected,
           );
         });
   }
@@ -37,15 +38,22 @@ class LoginContainer extends StatelessWidget {
 
 class _ViewModel {
   final Function onGoogleSignInSelected;
-  final Function onEmailSignUpSelected;
+  final Function(BuildContext) onEmailSignUpSelected;
+  final Function(BuildContext) onEmailSignInSelected;
 
-  _ViewModel({this.onGoogleSignInSelected, this.onEmailSignUpSelected});
+  _ViewModel({this.onGoogleSignInSelected, this.onEmailSignUpSelected, this.onEmailSignInSelected});
 
   static _ViewModel fromStore(Store<AppState> store) {
-    return new _ViewModel(onEmailSignUpSelected: () {
+    return new _ViewModel(
+      onEmailSignUpSelected: (context) {
       print('auth_container.viewModel: ShowSignUpAction');
-      store.dispatch(NavigateToEmailSignUpAction());
-    }, onGoogleSignInSelected: () async {
+      store.dispatch(NavigateToEmailSignUpAction(context));
+    }, 
+      onEmailSignInSelected: (context) {
+      print('auth_container.viewModel: ShowSignInAction');
+      store.dispatch(NavigateToEmailSignInAction(context));
+    }, 
+    onGoogleSignInSelected: () async {
       print('auth_container.viewModel: Google Sign in selected');
       try {
         await googleSignIn.signIn();

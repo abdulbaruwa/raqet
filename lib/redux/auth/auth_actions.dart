@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:raqet/redux/app/app_state.dart';
 
@@ -8,7 +7,7 @@ class LoadStateRequest {
   final BuildContext context;
 }
 
-class UserLogout{}
+class UserLogout {}
 
 class LoadUserLogin {
   LoadUserLogin(this.context);
@@ -22,6 +21,14 @@ class LoadStateSuccess {
   final AppState state;
 }
 
-class NavigateToEmailSignUpAction{}
+class NavigateToEmailSignUpAction {
+  NavigateToEmailSignUpAction(this.context);
 
-class NavigateToEmailSignInAction{}
+  final BuildContext context;
+}
+
+class NavigateToEmailSignInAction {
+  NavigateToEmailSignInAction(this.context);
+
+  final BuildContext context;
+}

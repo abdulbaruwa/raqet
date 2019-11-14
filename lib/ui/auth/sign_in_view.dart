@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:raqet/data/models/email_sign_up_Info.dart';
-import 'package:raqet/utils/validator.dart';
 
-class SignUpView extends StatelessWidget {
-  static final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+class SignInView extends StatelessWidget {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _email = new TextEditingController();
   final TextEditingController _password = new TextEditingController();
-  final Function(EmailSignUpInfo signUpInfo, BuildContext context) onSignUp;
+  final Function(EmailSignUpInfo signInInfo) onSignIn;
 
-  SignUpView({Key key, this.onSignUp}) : super(key: key);
+  SignInView({Key key, this.onSignIn}) : super(key: key);
 
-  bool _autoValidate = false;
-  bool _loadingVisible = false;
+  final bool _autoValidate = false;
+  final bool _loadingVisible = false;
 
   Widget build(BuildContext context) {
     final logo = Hero(
@@ -34,7 +33,6 @@ class SignUpView extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       controller: _email,
-      validator: Validator.validateName,
       decoration: InputDecoration(
         prefixIcon: Padding(
           padding: EdgeInsets.only(left: 5.0),
@@ -67,33 +65,44 @@ class SignUpView extends StatelessWidget {
       ),
     );
 
-    final signUpButton = Padding(
+    final loginButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        //  onPressed: () {},
-        onPressed: (){
-          var emailSignUp = new EmailSignUpInfo(
+        onPressed: () {
+          var emailSignIn = new EmailSignUpInfo(
               email: _email.text,
               password: _password.text);
 
-          this.onSignUp(emailSignUp, context);
+          this.onSignIn(emailSignIn);
+
+          // _emailLogin(email: _email.text, password: _password.text, context: context);
         },
         padding: EdgeInsets.all(12),
         color: Theme.of(context).primaryColor,
-        child: Text('SIGN UP', style: TextStyle(color: Colors.white)),
+        child: Text('SIGN IN', style: TextStyle(color: Colors.white)),
       ),
     );
 
-    final signInLabel = FlatButton(
+    final forgotLabel = FlatButton(
       child: Text(
-        'Have an Account? Sign In.',
+        'Forgot password?',
         style: TextStyle(color: Colors.black54),
       ),
       onPressed: () {
-        Navigator.pushNamed(context, '/signin');
+        Navigator.pushNamed(context, '/forgot-password');
+      },
+    );
+
+    final signUpLabel = FlatButton(
+      child: Text(
+        'Create an Account',
+        style: TextStyle(color: Colors.black54),
+      ),
+      onPressed: () {
+        Navigator.pushNamed(context, '/signup');
       },
     );
 
@@ -117,8 +126,9 @@ class SignUpView extends StatelessWidget {
                       SizedBox(height: 24.0),
                       password,
                       SizedBox(height: 12.0),
-                      signUpButton,
-                      signInLabel
+                      loginButton,
+                      forgotLabel,
+                      signUpLabel
                     ],
                   ),
                 ),
@@ -128,4 +138,5 @@ class SignUpView extends StatelessWidget {
           ),
     );
   }
+
 }

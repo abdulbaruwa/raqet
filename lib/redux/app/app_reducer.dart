@@ -1,7 +1,7 @@
 // We create the State reducer by combining many smaller reducers into one!
 import 'package:raqet/redux/app/app_state.dart';
 import 'package:raqet/redux/auth/auth_actions.dart';
-import 'package:raqet/redux/auth/settingsReducer.dart';
+import 'package:raqet/redux/auth/settings_reducer.dart';
 
 AppState appReducer(AppState state, dynamic action) {
   if (action is UserLogout) {

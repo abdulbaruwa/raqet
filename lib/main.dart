@@ -24,6 +24,7 @@ Future main({bool isTesting = false}) async {
       middleware: []
         ..addAll(createStoreAuthMiddleware())
         ..addAll(createStorePersistentMiddleware())
+        // ..add(NavigationMiddleware())
         ..addAll(isTesting
             ? []
             : [

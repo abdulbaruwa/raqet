@@ -26,11 +26,11 @@ class SignUpContainer extends StatelessWidget {
 
 class SignUpViewModel {
   Function() onRegistrationCancelled;
-  Function(EmailSignUpInfo signUpInfo) onSignUp;
+  Function(EmailSignUpInfo signUpInfo, BuildContext context) onSignUp;
 
   SignUpViewModel({this.onRegistrationCancelled, this.onSignUp});
   static SignUpViewModel fromStore(Store<AppState> store) {
-    return SignUpViewModel(onSignUp: (signUpInfo) {
+    return SignUpViewModel(onSignUp: (signUpInfo, context) {
       print('Sign up player with email');
       FirebaseAuth.instance
           .createUserWithEmailAndPassword(
@@ -38,7 +38,7 @@ class SignUpViewModel {
           .then((user) {
         print('Firebase user created with uid {user.user.uid}');
 
-        store.dispatch(new NavigateToEmailSignInAction());
+        store.dispatch(new NavigateToEmailSignInAction(context));
         // store.dispatch(new SignUpCompletedAction(signUpInfo.email, user.user.uid));
       }).catchError((onError) {
         print('Error signing up user: $onError');

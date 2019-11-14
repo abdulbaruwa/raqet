@@ -20,13 +20,16 @@ final ThemeData _kTheme = new ThemeData(
 class LoginView extends StatefulWidget {
   final bool isSignedIn;
   final Function onGoogleSignInSelected;
+  final Function onEmailSignUpSelected;
   final Function onEmailSignInSelected;
 
   LoginView(
       {Key key,
       this.isSignedIn,
       this.onGoogleSignInSelected,
-      this.onEmailSignInSelected})
+      this.onEmailSignUpSelected,
+      this.onEmailSignInSelected,
+      })
       : super(key: key);
 
   @override
@@ -126,12 +129,7 @@ class LandingState extends State<LoginView> {
                                         padding: const EdgeInsets.only(
                                             left: 10, right: 10),
                                         child: RaisedButton(
-                                        // onPressed:() {print('Email Auth');}, 
-                                        onPressed: widget.onEmailSignInSelected,
-                                        //  onPressed: () {
-                                        //   Navigator.push(context, new MaterialPageRoute(
-                                        //       builder: (BuildContext context) => new EmailSignUp()));
-                                        //     },
+                                        onPressed:()=> widget.onEmailSignUpSelected(context),
                                             child: Padding(
                                               padding:
                                                   const EdgeInsets.fromLTRB(
@@ -193,7 +191,7 @@ class LandingState extends State<LoginView> {
                                                           Drawhorizontalline())),
                                             ])),
                                     FlatButton(
-                                        onPressed: () {},
+                                        onPressed: () => widget.onEmailSignInSelected(context),
                                         child: Padding(
                                           padding: const EdgeInsets.fromLTRB(
                                               0, 10, 0, 10),
