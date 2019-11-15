@@ -34,7 +34,7 @@ class SignUpView extends StatelessWidget {
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       controller: _email,
-      validator: Validator.validateName,
+      validator: Validator.validateEmail,
       decoration: InputDecoration(
         prefixIcon: Padding(
           padding: EdgeInsets.only(left: 5.0),

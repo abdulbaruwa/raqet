@@ -33,11 +33,9 @@ class SignUpViewModel {
     return SignUpViewModel(onSignUp: (signUpInfo, context) {
       print('Sign up player with email');
       FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              email: signUpInfo.email, password: signUpInfo.password)
+          .createUserWithEmailAndPassword(email: signUpInfo.email, password: signUpInfo.password)
           .then((user) {
         print('Firebase user created with uid {user.user.uid}');
-
         store.dispatch(new NavigateToEmailSignInAction(context));
         // store.dispatch(new SignUpCompletedAction(signUpInfo.email, user.user.uid));
       }).catchError((onError) {
