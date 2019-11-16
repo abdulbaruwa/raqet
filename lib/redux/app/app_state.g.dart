@@ -30,6 +30,16 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       'isTesting',
       serializers.serialize(object.isTesting,
           specifiedType: const FullType(bool)),
+      'activeTab',
+      serializers.serialize(object.activeTab,
+          specifiedType: const FullType(AppTab)),
+      'player',
+      serializers.serialize(object.player,
+          specifiedType: const FullType(PlayerEntity)),
+      'matchResultInfos',
+      serializers.serialize(object.matchResultInfos,
+          specifiedType: const FullType(
+              BuiltList, const [const FullType(MatchResultInfoEntity)])),
     ];
 
     return result;
@@ -62,6 +72,20 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
           result.isTesting = serializers.deserialize(value,
               specifiedType: const FullType(bool)) as bool;
           break;
+        case 'activeTab':
+          result.activeTab = serializers.deserialize(value,
+              specifiedType: const FullType(AppTab)) as AppTab;
+          break;
+        case 'player':
+          result.player.replace(serializers.deserialize(value,
+              specifiedType: const FullType(PlayerEntity)) as PlayerEntity);
+          break;
+        case 'matchResultInfos':
+          result.matchResultInfos.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(MatchResultInfoEntity)]))
+              as BuiltList<dynamic>);
+          break;
       }
     }
 
@@ -78,12 +102,24 @@ class _$AppState extends AppState {
   final bool isSaving;
   @override
   final bool isTesting;
+  @override
+  final AppTab activeTab;
+  @override
+  final PlayerEntity player;
+  @override
+  final BuiltList<MatchResultInfoEntity> matchResultInfos;
 
   factory _$AppState([void Function(AppStateBuilder) updates]) =>
       (new AppStateBuilder()..update(updates)).build();
 
   _$AppState._(
-      {this.settingsState, this.isLoading, this.isSaving, this.isTesting})
+      {this.settingsState,
+      this.isLoading,
+      this.isSaving,
+      this.isTesting,
+      this.activeTab,
+      this.player,
+      this.matchResultInfos})
       : super._() {
     if (settingsState == null) {
       throw new BuiltValueNullFieldError('AppState', 'settingsState');
@@ -96,6 +132,15 @@ class _$AppState extends AppState {
     }
     if (isTesting == null) {
       throw new BuiltValueNullFieldError('AppState', 'isTesting');
+    }
+    if (activeTab == null) {
+      throw new BuiltValueNullFieldError('AppState', 'activeTab');
+    }
+    if (player == null) {
+      throw new BuiltValueNullFieldError('AppState', 'player');
+    }
+    if (matchResultInfos == null) {
+      throw new BuiltValueNullFieldError('AppState', 'matchResultInfos');
     }
   }
 
@@ -113,15 +158,24 @@ class _$AppState extends AppState {
         settingsState == other.settingsState &&
         isLoading == other.isLoading &&
         isSaving == other.isSaving &&
-        isTesting == other.isTesting;
+        isTesting == other.isTesting &&
+        activeTab == other.activeTab &&
+        player == other.player &&
+        matchResultInfos == other.matchResultInfos;
   }
 
   @override
   int get hashCode {
     return $jf($jc(
-        $jc($jc($jc(0, settingsState.hashCode), isLoading.hashCode),
-            isSaving.hashCode),
-        isTesting.hashCode));
+        $jc(
+            $jc(
+                $jc(
+                    $jc($jc($jc(0, settingsState.hashCode), isLoading.hashCode),
+                        isSaving.hashCode),
+                    isTesting.hashCode),
+                activeTab.hashCode),
+            player.hashCode),
+        matchResultInfos.hashCode));
   }
 
   @override
@@ -130,7 +184,10 @@ class _$AppState extends AppState {
           ..add('settingsState', settingsState)
           ..add('isLoading', isLoading)
           ..add('isSaving', isSaving)
-          ..add('isTesting', isTesting))
+          ..add('isTesting', isTesting)
+          ..add('activeTab', activeTab)
+          ..add('player', player)
+          ..add('matchResultInfos', matchResultInfos))
         .toString();
   }
 }
@@ -156,6 +213,21 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
   bool get isTesting => _$this._isTesting;
   set isTesting(bool isTesting) => _$this._isTesting = isTesting;
 
+  AppTab _activeTab;
+  AppTab get activeTab => _$this._activeTab;
+  set activeTab(AppTab activeTab) => _$this._activeTab = activeTab;
+
+  PlayerEntityBuilder _player;
+  PlayerEntityBuilder get player =>
+      _$this._player ??= new PlayerEntityBuilder();
+  set player(PlayerEntityBuilder player) => _$this._player = player;
+
+  ListBuilder<MatchResultInfoEntity> _matchResultInfos;
+  ListBuilder<MatchResultInfoEntity> get matchResultInfos =>
+      _$this._matchResultInfos ??= new ListBuilder<MatchResultInfoEntity>();
+  set matchResultInfos(ListBuilder<MatchResultInfoEntity> matchResultInfos) =>
+      _$this._matchResultInfos = matchResultInfos;
+
   AppStateBuilder();
 
   AppStateBuilder get _$this {
@@ -164,6 +236,9 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _isLoading = _$v.isLoading;
       _isSaving = _$v.isSaving;
       _isTesting = _$v.isTesting;
+      _activeTab = _$v.activeTab;
+      _player = _$v.player?.toBuilder();
+      _matchResultInfos = _$v.matchResultInfos?.toBuilder();
       _$v = null;
     }
     return this;
@@ -191,12 +266,20 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
               settingsState: settingsState.build(),
               isLoading: isLoading,
               isSaving: isSaving,
-              isTesting: isTesting);
+              isTesting: isTesting,
+              activeTab: activeTab,
+              player: player.build(),
+              matchResultInfos: matchResultInfos.build());
     } catch (_) {
       String _$failedField;
       try {
         _$failedField = 'settingsState';
         settingsState.build();
+
+        _$failedField = 'player';
+        player.build();
+        _$failedField = 'matchResultInfos';
+        matchResultInfos.build();
       } catch (e) {
         throw new BuiltValueNestedFieldError(
             'AppState', _$failedField, e.toString());

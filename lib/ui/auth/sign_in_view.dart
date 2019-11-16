@@ -6,7 +6,7 @@ class SignInView extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final TextEditingController _email = new TextEditingController();
   final TextEditingController _password = new TextEditingController();
-  final Function(EmailSignUpInfo signInInfo) onSignIn;
+  final Function(EmailSignUpInfo signInInfo, BuildContext context) onSignIn;
   final Function onEmailSignUpSelected;
   final Function onPasswordResetSelected;
 
@@ -85,7 +85,7 @@ class SignInView extends StatelessWidget {
             var emailSignIn = new EmailSignUpInfo(
                 email: _email.text, password: _password.text);
 
-            this.onSignIn(emailSignIn);
+            this.onSignIn(emailSignIn, context);
 
             // _emailLogin(email: _email.text, password: _password.text, context: context);
           }

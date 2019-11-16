@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:raqet/data/models/email_sign_up_Info.dart';
 import 'package:raqet/redux/app/app_state.dart';
 import 'package:raqet/redux/auth/auth_actions.dart';
+import 'package:raqet/redux/dashboard/dashboard_actions.dart';
 import 'package:raqet/ui/auth/sign_in_view.dart';
 import 'package:raqet/utils/id_generator.dart';
 import 'package:redux/redux.dart';
@@ -29,29 +30,34 @@ class SignInContainer extends StatelessWidget {
 }
 
 class SignInViewModel {
-  Function(EmailSignUpInfo signUpInfo) onSignIn;
+  Function(EmailSignUpInfo signUpInfo, BuildContext context) onSignIn;
   Function(BuildContext) onEmailSignUpSelected;
   Function(BuildContext) onPasswordResetSelected;
   SignInViewModel(
       {this.onSignIn,
       this.onEmailSignUpSelected,
       this.onPasswordResetSelected});
+
   static SignInViewModel fromStore(Store<AppState> store) {
+
     return new SignInViewModel(onEmailSignUpSelected: (context) {
       store.dispatch(NavigateToEmailSignUpAction(context));
     }, onPasswordResetSelected: (context) {
       store.dispatch(NavigateToPasswordResetAction(context));
-    }, onSignIn: (signInInfo) {
+    }, onSignIn: (signInInfo, context) {
       print('Sign in player with email');
 
       FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: signInInfo.email, password: signInInfo.password)
-          .then((result) {
-        result.user.getIdToken().then((onValue) {
-          print('Auth token retrieved for signed in User');
+          .then((result) 
+          {
+                result.user.getIdToken().then((onValue) {
+                print('Auth token retrieved for signed in User: $onValue');
 
-          var playerId = IdGenerator().newPlayerId(result.user.uid);
+                var playerId = IdGenerator().newPlayerId(result.user.uid);
+
+                store.dispatch(ViewDashboard(context: context));
 
           // var setting = new Settings(
           //     email: result.user.email,
@@ -61,6 +67,8 @@ class SignInViewModel {
 
           //   store.dispatch(new SignInCompletedAction(setting));
           //   store.dispatch(new NavigateToRegistrationAction());
+
+
         }).catchError((onError) {
           print('Error getting auth token for signed in user $onError');
         });
