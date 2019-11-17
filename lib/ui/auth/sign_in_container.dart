@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_redux/flutter_redux.dart';
@@ -5,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:raqet/data/models/email_sign_up_Info.dart';
 import 'package:raqet/redux/app/app_state.dart';
 import 'package:raqet/redux/auth/auth_actions.dart';
+import 'package:raqet/redux/auth/settings_reducer.dart';
+import 'package:raqet/redux/auth/settings_state.dart';
 import 'package:raqet/redux/dashboard/dashboard_actions.dart';
 import 'package:raqet/ui/auth/sign_in_view.dart';
 import 'package:raqet/utils/id_generator.dart';
@@ -39,7 +43,6 @@ class SignInViewModel {
       this.onPasswordResetSelected});
 
   static SignInViewModel fromStore(Store<AppState> store) {
-
     return new SignInViewModel(onEmailSignUpSelected: (context) {
       store.dispatch(NavigateToEmailSignUpAction(context));
     }, onPasswordResetSelected: (context) {
@@ -50,25 +53,24 @@ class SignInViewModel {
       FirebaseAuth.instance
           .signInWithEmailAndPassword(
               email: signInInfo.email, password: signInInfo.password)
-          .then((result) 
-          {
-                result.user.getIdToken().then((onValue) {
-                print('Auth token retrieved for signed in User: $onValue');
+          .then((result) {
+        result.user.getIdToken().then((onValue) {
+          print('Auth token retrieved for signed in User: $onValue');
 
-                var playerId = IdGenerator().newPlayerId(result.user.uid);
+          var playerId = IdGenerator().newPlayerId(result.user.uid);
+          var settingState = SettingsState().rebuild((b) => b
+            ..email = result.user.email
+            ..playerId = playerId
+            ..name = result.user.displayName ?? ''
+            ..photoUrl = result.user.photoUrl ?? '');
 
-                store.dispatch(ViewDashboard(context: context));
+          final Completer<Null> completer = Completer<Null>();
 
-          // var setting = new Settings(
-          //     email: result.user.email,
-          //     playerId: playerId,
-          //     name: result.user.displayName,
-          //     photoUrl: result.user.photoUrl);
+          store.dispatch(SignInCompletedAction(settings: settingState, completer: completer));
+          store.dispatch(ViewDashboard(context: context));
 
           //   store.dispatch(new SignInCompletedAction(setting));
           //   store.dispatch(new NavigateToRegistrationAction());
-
-
         }).catchError((onError) {
           print('Error getting auth token for signed in user $onError');
         });

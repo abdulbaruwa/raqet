@@ -17,7 +17,6 @@ abstract class SettingsState implements Built<SettingsState, SettingsStateBuilde
   String get  azureAuthToken;
   String get  name;
 
-
    factory SettingsState() {
     return _$SettingsState._(
       refreshToken: '',

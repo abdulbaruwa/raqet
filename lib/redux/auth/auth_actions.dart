@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:raqet/redux/app/app_state.dart';
+import 'package:raqet/redux/auth/settings_state.dart';
 
 class LoadStateRequest {
   LoadStateRequest(this.context);
@@ -37,4 +40,10 @@ class NavigateToPasswordResetAction {
   NavigateToPasswordResetAction(this.context);
 
   final BuildContext context;
+}
+
+class SignInCompletedAction{
+  final SettingsState settings;
+  final Completer completer;
+  SignInCompletedAction({this.settings, this.completer});
 }
