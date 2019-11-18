@@ -7,9 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:raqet/data/models/email_sign_up_Info.dart';
 import 'package:raqet/redux/app/app_state.dart';
 import 'package:raqet/redux/auth/auth_actions.dart';
-import 'package:raqet/redux/auth/settings_reducer.dart';
 import 'package:raqet/redux/auth/settings_state.dart';
-import 'package:raqet/redux/dashboard/dashboard_actions.dart';
+import 'package:raqet/redux/main/view_main.dart';
 import 'package:raqet/ui/auth/sign_in_view.dart';
 import 'package:raqet/utils/id_generator.dart';
 import 'package:redux/redux.dart';
@@ -68,7 +67,7 @@ class SignInViewModel {
           final Completer<Null> completer = Completer<Null>();
 
           store.dispatch(SignInCompletedAction(settings: settingState, completer: completer));
-          store.dispatch(ViewDashboard(context: context));
+          store.dispatch(ViewMain(context: context));
 
           //   store.dispatch(new SignInCompletedAction(setting));
           //   store.dispatch(new NavigateToRegistrationAction());

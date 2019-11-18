@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_redux/flutter_redux.dart';
 import 'package:raqet/data/models/app_tab.dart';
 import 'package:raqet/keys.dart';
-import 'package:raqet/redux/dashboard/dashboard_actions.dart';
 import 'package:raqet/redux/main/tab_selector.dart';
 import 'package:raqet/ui/dashboard/dashboard_container.dart';
 import 'package:raqet/ui/main/active_tab.dart';
-import 'package:redux/redux.dart';
 
+class MainTab extends StatelessWidget {
+  MainTab() : super(key: RaqetKeys.homeScreen);
 
-class TennisAiHome extends StatelessWidget {
-  TennisAiHome() : super(key: RaqetKeys.homeScreen);
+  static const String route = '/main';
 
   @override
   Widget build(BuildContext context) {

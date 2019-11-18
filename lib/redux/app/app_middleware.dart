@@ -3,7 +3,7 @@ import 'package:raqet/data/repositories/file_storate.dart';
 import 'package:raqet/data/repositories/persistence_repository.dart';
 import 'package:raqet/redux/app/app_state.dart';
 import 'package:raqet/redux/auth/auth_actions.dart';
-import 'package:raqet/redux/dashboard/dashboard_actions.dart';
+import 'package:raqet/redux/main/view_main.dart';
 import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createStorePersistentMiddleware(
@@ -23,7 +23,7 @@ Middleware<AppState> _createLoadState(
     if (!settingsState.signedIn) {
       store.dispatch(LoadUserLogin(action.context));
     } else {
-      store.dispatch(ViewDashboard(context: action.context));
+      store.dispatch(ViewMain(context: action.context));
     }
     next(action);
   };

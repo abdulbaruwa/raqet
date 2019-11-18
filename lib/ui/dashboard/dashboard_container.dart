@@ -8,7 +8,6 @@ import 'package:raqet/redux/app/app_state.dart';
 import 'package:raqet/ui/dashboard/dashboard_view.dart';
 import 'package:raqet/ui/selectors/selectors.dart';
 import 'package:redux/redux.dart';
-import 'package:swagger/api.dart';
 
 class DashboardContainer extends StatelessWidget {
   DashboardContainer({Key key}) : super(key: key);

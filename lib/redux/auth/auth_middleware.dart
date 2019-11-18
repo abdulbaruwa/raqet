@@ -4,12 +4,12 @@ import 'package:raqet/data/repositories/file_storate.dart';
 import 'package:raqet/data/repositories/persistence_repository.dart';
 import 'package:raqet/redux/app/app_state.dart';
 import 'package:raqet/redux/auth/auth_actions.dart';
-import 'package:raqet/redux/dashboard/dashboard_actions.dart';
+import 'package:raqet/redux/main/view_main.dart';
 import 'package:raqet/ui/auth/forgot_password_container.dart';
 import 'package:raqet/ui/auth/login_container.dart';
 import 'package:raqet/ui/auth/sign_in_container.dart';
 import 'package:raqet/ui/auth/sign_up_container.dart';
-import 'package:raqet/ui/dashboard/dashboard_container.dart';
+import 'package:raqet/ui/main/main_tab.dart';
 import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createStoreAuthMiddleware(  [PersistenceRepository settingsRepository = const PersistenceRepository(
@@ -26,7 +26,7 @@ List<Middleware<AppState>> createStoreAuthMiddleware(  [PersistenceRepository se
   TypedMiddleware<AppState, NavigateToEmailSignUpAction>(navigateToEmailSignUp),
   TypedMiddleware<AppState, NavigateToPasswordResetAction>(navigateToPasswordReset),
   TypedMiddleware<AppState, NavigateToEmailSignInAction>(navigateToEmailSignIn),
-  TypedMiddleware<AppState, ViewDashboard>(viewDashboard),
+  TypedMiddleware<AppState, ViewMain>(viewDashboard),
   TypedMiddleware<AppState, SignInCompletedAction>(saveSettigns),
   ];
 }
@@ -73,9 +73,9 @@ Middleware<AppState> _navigateToPasswordReset() {
 
 Middleware<AppState> _viewDashboard() {
   return (Store<AppState> store, dynamic dynamicAction, NextDispatcher next) {
-    final action = dynamicAction as ViewDashboard;
+    final action = dynamicAction as ViewMain;
 
-    Navigator.of(action.context).pushReplacementNamed(DashboardContainer.route);
+    Navigator.of(action.context).pushReplacementNamed(MainTab.route);
 
     next(action);
   };
