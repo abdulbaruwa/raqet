@@ -59,6 +59,7 @@ class SignInViewModel {
 
           var playerId = IdGenerator().newPlayerId(result.user.uid);
           var settingState = SettingsState().rebuild((b) => b
+            ..signedIn = true
             ..email = result.user.email
             ..playerId = playerId
             ..name = result.user.displayName ?? ''

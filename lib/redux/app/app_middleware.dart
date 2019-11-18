@@ -3,6 +3,7 @@ import 'package:raqet/data/repositories/file_storate.dart';
 import 'package:raqet/data/repositories/persistence_repository.dart';
 import 'package:raqet/redux/app/app_state.dart';
 import 'package:raqet/redux/auth/auth_actions.dart';
+import 'package:raqet/redux/dashboard/dashboard_actions.dart';
 import 'package:redux/redux.dart';
 
 List<Middleware<AppState>> createStorePersistentMiddleware(
@@ -15,13 +16,15 @@ List<Middleware<AppState>> createStorePersistentMiddleware(
 
 Middleware<AppState> _createLoadState(
     PersistenceRepository settingsRepository) {
-  return (Store<AppState> store, dynamic dynamicAction, NextDispatcher next) async {
+  return (Store<AppState> store, dynamic dynamicAction,
+      NextDispatcher next) async {
     final action = dynamicAction as LoadStateRequest;
     var settingsState = await settingsRepository.loadSettingsState();
-    if(! settingsState.signedIn){
+    if (!settingsState.signedIn) {
       store.dispatch(LoadUserLogin(action.context));
+    } else {
+      store.dispatch(ViewDashboard(context: action.context));
     }
-
     next(action);
   };
 }
