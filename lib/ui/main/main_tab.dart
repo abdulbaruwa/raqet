@@ -22,6 +22,8 @@ class MainTab extends StatelessWidget {
     return new ActiveTab(
       builder: (BuildContext context, AppTab activeTab) {
         return new Scaffold(
+          appBar: new AppBar(title: new Text('Home')),
+          drawer: new Drawer(child: ListView(children: <Widget>[Text('Menu 1'), Text('Menu 2')],),),
           body: _selectActiveTab(context, activeTab),
           bottomNavigationBar: TabSelector(),
         );
