@@ -1,3 +1,4 @@
+import 'package:built_collection/built_collection.dart';
 import 'package:built_value/built_value.dart';
 import 'package:built_value/serializer.dart';
 import 'package:raqet/data/models/enums.dart';
@@ -40,4 +41,16 @@ abstract class MatchResultInfoEntity
 
   static Serializer<MatchResultInfoEntity> get serializer =>
       _$matchResultInfoEntitySerializer;
+}
+
+abstract class MatchResultInfoEntityListResponse implements Built<MatchResultInfoEntityListResponse, MatchResultInfoEntityListResponseBuilder>{
+  factory MatchResultInfoEntityListResponse([void updates(MatchResultInfoEntityListResponseBuilder b)]) = _$MatchResultInfoEntityListResponse;
+
+  MatchResultInfoEntityListResponse._();
+
+  BuiltList<MatchResultInfoEntity> get data;
+
+  static Serializer<MatchResultInfoEntityListResponse> get serializer => _$matchResultInfoEntityListResponseSerializer;
+
+  
 }

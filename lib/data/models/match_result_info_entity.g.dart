@@ -8,6 +8,9 @@ part of 'match_result_info_entity.dart';
 
 Serializer<MatchResultInfoEntity> _$matchResultInfoEntitySerializer =
     new _$MatchResultInfoEntitySerializer();
+Serializer<MatchResultInfoEntityListResponse>
+    _$matchResultInfoEntityListResponseSerializer =
+    new _$MatchResultInfoEntityListResponseSerializer();
 
 class _$MatchResultInfoEntitySerializer
     implements StructuredSerializer<MatchResultInfoEntity> {
@@ -123,6 +126,55 @@ class _$MatchResultInfoEntitySerializer
         case 'cosmosEntityName':
           result.cosmosEntityName = serializers.deserialize(value,
               specifiedType: const FullType(String)) as String;
+          break;
+      }
+    }
+
+    return result.build();
+  }
+}
+
+class _$MatchResultInfoEntityListResponseSerializer
+    implements StructuredSerializer<MatchResultInfoEntityListResponse> {
+  @override
+  final Iterable<Type> types = const [
+    MatchResultInfoEntityListResponse,
+    _$MatchResultInfoEntityListResponse
+  ];
+  @override
+  final String wireName = 'MatchResultInfoEntityListResponse';
+
+  @override
+  Iterable<Object> serialize(
+      Serializers serializers, MatchResultInfoEntityListResponse object,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = <Object>[
+      'data',
+      serializers.serialize(object.data,
+          specifiedType: const FullType(
+              BuiltList, const [const FullType(MatchResultInfoEntity)])),
+    ];
+
+    return result;
+  }
+
+  @override
+  MatchResultInfoEntityListResponse deserialize(
+      Serializers serializers, Iterable<Object> serialized,
+      {FullType specifiedType = FullType.unspecified}) {
+    final result = new MatchResultInfoEntityListResponseBuilder();
+
+    final iterator = serialized.iterator;
+    while (iterator.moveNext()) {
+      final key = iterator.current as String;
+      iterator.moveNext();
+      final dynamic value = iterator.current;
+      switch (key) {
+        case 'data':
+          result.data.replace(serializers.deserialize(value,
+                  specifiedType: const FullType(
+                      BuiltList, const [const FullType(MatchResultInfoEntity)]))
+              as BuiltList<dynamic>);
           break;
       }
     }
@@ -398,6 +450,106 @@ class MatchResultInfoEntityBuilder
             appliedToRanking: appliedToRanking,
             playerId: playerId,
             cosmosEntityName: cosmosEntityName);
+    replace(_$result);
+    return _$result;
+  }
+}
+
+class _$MatchResultInfoEntityListResponse
+    extends MatchResultInfoEntityListResponse {
+  @override
+  final BuiltList<MatchResultInfoEntity> data;
+
+  factory _$MatchResultInfoEntityListResponse(
+          [void Function(MatchResultInfoEntityListResponseBuilder) updates]) =>
+      (new MatchResultInfoEntityListResponseBuilder()..update(updates)).build();
+
+  _$MatchResultInfoEntityListResponse._({this.data}) : super._() {
+    if (data == null) {
+      throw new BuiltValueNullFieldError(
+          'MatchResultInfoEntityListResponse', 'data');
+    }
+  }
+
+  @override
+  MatchResultInfoEntityListResponse rebuild(
+          void Function(MatchResultInfoEntityListResponseBuilder) updates) =>
+      (toBuilder()..update(updates)).build();
+
+  @override
+  MatchResultInfoEntityListResponseBuilder toBuilder() =>
+      new MatchResultInfoEntityListResponseBuilder()..replace(this);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is MatchResultInfoEntityListResponse && data == other.data;
+  }
+
+  @override
+  int get hashCode {
+    return $jf($jc(0, data.hashCode));
+  }
+
+  @override
+  String toString() {
+    return (newBuiltValueToStringHelper('MatchResultInfoEntityListResponse')
+          ..add('data', data))
+        .toString();
+  }
+}
+
+class MatchResultInfoEntityListResponseBuilder
+    implements
+        Builder<MatchResultInfoEntityListResponse,
+            MatchResultInfoEntityListResponseBuilder> {
+  _$MatchResultInfoEntityListResponse _$v;
+
+  ListBuilder<MatchResultInfoEntity> _data;
+  ListBuilder<MatchResultInfoEntity> get data =>
+      _$this._data ??= new ListBuilder<MatchResultInfoEntity>();
+  set data(ListBuilder<MatchResultInfoEntity> data) => _$this._data = data;
+
+  MatchResultInfoEntityListResponseBuilder();
+
+  MatchResultInfoEntityListResponseBuilder get _$this {
+    if (_$v != null) {
+      _data = _$v.data?.toBuilder();
+      _$v = null;
+    }
+    return this;
+  }
+
+  @override
+  void replace(MatchResultInfoEntityListResponse other) {
+    if (other == null) {
+      throw new ArgumentError.notNull('other');
+    }
+    _$v = other as _$MatchResultInfoEntityListResponse;
+  }
+
+  @override
+  void update(void Function(MatchResultInfoEntityListResponseBuilder) updates) {
+    if (updates != null) updates(this);
+  }
+
+  @override
+  _$MatchResultInfoEntityListResponse build() {
+    _$MatchResultInfoEntityListResponse _$result;
+    try {
+      _$result =
+          _$v ?? new _$MatchResultInfoEntityListResponse._(data: data.build());
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'data';
+        data.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'MatchResultInfoEntityListResponse', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }

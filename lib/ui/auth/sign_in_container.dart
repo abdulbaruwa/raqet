@@ -67,7 +67,7 @@ class SignInViewModel {
           final Completer<Null> completer = Completer<Null>();
 
           store.dispatch(SignInCompletedAction(settings: settingState, completer: completer));
-          store.dispatch(ViewMain(context: context));
+          store.dispatch(ViewMain(context: context, playerId: playerId));
 
           //   store.dispatch(new SignInCompletedAction(setting));
           //   store.dispatch(new NavigateToRegistrationAction());

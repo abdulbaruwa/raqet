@@ -36,6 +36,9 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
       'player',
       serializers.serialize(object.player,
           specifiedType: const FullType(PlayerEntity)),
+      'dashboardState',
+      serializers.serialize(object.dashboardState,
+          specifiedType: const FullType(DashboardState)),
       'matchResultInfos',
       serializers.serialize(object.matchResultInfos,
           specifiedType: const FullType(
@@ -80,6 +83,10 @@ class _$AppStateSerializer implements StructuredSerializer<AppState> {
           result.player.replace(serializers.deserialize(value,
               specifiedType: const FullType(PlayerEntity)) as PlayerEntity);
           break;
+        case 'dashboardState':
+          result.dashboardState.replace(serializers.deserialize(value,
+              specifiedType: const FullType(DashboardState)) as DashboardState);
+          break;
         case 'matchResultInfos':
           result.matchResultInfos.replace(serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -107,6 +114,8 @@ class _$AppState extends AppState {
   @override
   final PlayerEntity player;
   @override
+  final DashboardState dashboardState;
+  @override
   final BuiltList<MatchResultInfoEntity> matchResultInfos;
 
   factory _$AppState([void Function(AppStateBuilder) updates]) =>
@@ -119,6 +128,7 @@ class _$AppState extends AppState {
       this.isTesting,
       this.activeTab,
       this.player,
+      this.dashboardState,
       this.matchResultInfos})
       : super._() {
     if (settingsState == null) {
@@ -138,6 +148,9 @@ class _$AppState extends AppState {
     }
     if (player == null) {
       throw new BuiltValueNullFieldError('AppState', 'player');
+    }
+    if (dashboardState == null) {
+      throw new BuiltValueNullFieldError('AppState', 'dashboardState');
     }
     if (matchResultInfos == null) {
       throw new BuiltValueNullFieldError('AppState', 'matchResultInfos');
@@ -161,6 +174,7 @@ class _$AppState extends AppState {
         isTesting == other.isTesting &&
         activeTab == other.activeTab &&
         player == other.player &&
+        dashboardState == other.dashboardState &&
         matchResultInfos == other.matchResultInfos;
   }
 
@@ -170,11 +184,15 @@ class _$AppState extends AppState {
         $jc(
             $jc(
                 $jc(
-                    $jc($jc($jc(0, settingsState.hashCode), isLoading.hashCode),
-                        isSaving.hashCode),
-                    isTesting.hashCode),
-                activeTab.hashCode),
-            player.hashCode),
+                    $jc(
+                        $jc(
+                            $jc($jc(0, settingsState.hashCode),
+                                isLoading.hashCode),
+                            isSaving.hashCode),
+                        isTesting.hashCode),
+                    activeTab.hashCode),
+                player.hashCode),
+            dashboardState.hashCode),
         matchResultInfos.hashCode));
   }
 
@@ -187,6 +205,7 @@ class _$AppState extends AppState {
           ..add('isTesting', isTesting)
           ..add('activeTab', activeTab)
           ..add('player', player)
+          ..add('dashboardState', dashboardState)
           ..add('matchResultInfos', matchResultInfos))
         .toString();
   }
@@ -222,6 +241,12 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _$this._player ??= new PlayerEntityBuilder();
   set player(PlayerEntityBuilder player) => _$this._player = player;
 
+  DashboardStateBuilder _dashboardState;
+  DashboardStateBuilder get dashboardState =>
+      _$this._dashboardState ??= new DashboardStateBuilder();
+  set dashboardState(DashboardStateBuilder dashboardState) =>
+      _$this._dashboardState = dashboardState;
+
   ListBuilder<MatchResultInfoEntity> _matchResultInfos;
   ListBuilder<MatchResultInfoEntity> get matchResultInfos =>
       _$this._matchResultInfos ??= new ListBuilder<MatchResultInfoEntity>();
@@ -238,6 +263,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
       _isTesting = _$v.isTesting;
       _activeTab = _$v.activeTab;
       _player = _$v.player?.toBuilder();
+      _dashboardState = _$v.dashboardState?.toBuilder();
       _matchResultInfos = _$v.matchResultInfos?.toBuilder();
       _$v = null;
     }
@@ -269,6 +295,7 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
               isTesting: isTesting,
               activeTab: activeTab,
               player: player.build(),
+              dashboardState: dashboardState.build(),
               matchResultInfos: matchResultInfos.build());
     } catch (_) {
       String _$failedField;
@@ -278,6 +305,8 @@ class AppStateBuilder implements Builder<AppState, AppStateBuilder> {
 
         _$failedField = 'player';
         player.build();
+        _$failedField = 'dashboardState';
+        dashboardState.build();
         _$failedField = 'matchResultInfos';
         matchResultInfos.build();
       } catch (e) {

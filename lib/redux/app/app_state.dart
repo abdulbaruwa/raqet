@@ -7,6 +7,7 @@ import 'package:raqet/data/models/app_tab.dart';
 import 'package:raqet/data/models/match_result_info_entity.dart';
 import 'package:raqet/data/models/player_entity.dart';
 import 'package:raqet/redux/auth/settings_state.dart';
+import 'package:raqet/ui/dashboard/dashboard_state.dart';
 import 'package:swagger/api.dart';
 
 part 'app_state.g.dart';
@@ -20,6 +21,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
         activeTab: AppTab.home,
         player: PlayerEntity(),
         matchResultInfos: BuiltList<MatchResultInfoEntity>(),
+        dashboardState: DashboardState(),
         settingsState: SettingsState());
   }
 
@@ -31,6 +33,7 @@ abstract class AppState implements Built<AppState, AppStateBuilder> {
   bool get isTesting;
   AppTab get activeTab;
   PlayerEntity get player;
+  DashboardState get dashboardState;
   File get avatar => null;
   BuiltList<MatchResultInfoEntity> get matchResultInfos;
   //factory AppState([void updates(AppStateBuilder b)]) = _$AppState;

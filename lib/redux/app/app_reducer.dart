@@ -2,6 +2,7 @@
 import 'package:raqet/redux/app/app_state.dart';
 import 'package:raqet/redux/auth/auth_actions.dart';
 import 'package:raqet/redux/auth/settings_reducer.dart';
+import 'package:raqet/ui/dashboard/dasboard_middleware.dart';
 
 AppState appReducer(AppState state, dynamic action) {
   if (action is UserLogout) {
@@ -16,6 +17,8 @@ AppState appReducer(AppState state, dynamic action) {
 
   return state.rebuild((b) => b
     ..settingsState.replace(settingsReducer(state.settingsState, action))
+    ..dashboardState.replace(dashboardReducer(state.dashboardState, action))
     );
+
 }
 

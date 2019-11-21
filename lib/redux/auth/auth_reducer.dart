@@ -5,7 +5,7 @@ import 'package:raqet/redux/auth/auth_actions.dart';
 import 'package:redux/redux.dart';
 
 Reducer<AppState> authReducter = combineReducers([
-  TypedReducer<AppState, SignInCompletedAction>(signInCompleted)
+  TypedReducer<AppState, SignInCompletedAction>(signInCompleted),
 ]);
 
 AppState signInCompleted(AppState authState, SignInCompletedAction action){

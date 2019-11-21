@@ -10,14 +10,24 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(AddressEntity.serializer)
       ..add(AgeGroup.serializer)
       ..add(AppState.serializer)
+      ..add(DashboardState.serializer)
       ..add(Gender.serializer)
       ..add(MatchResultInfoEntity.serializer)
+      ..add(MatchResultInfoEntityListResponse.serializer)
       ..add(PlayerEntity.serializer)
       ..add(RankingInfoEntity.serializer)
       ..add(SearchPreferenceEntity.serializer)
       ..add(SettingsState.serializer)
       ..add(TournamentGrade.serializer)
       ..add(TournamentStatus.serializer)
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(MatchResultInfoEntity)]),
+          () => new ListBuilder<MatchResultInfoEntity>())
+      ..addBuilderFactory(
+          const FullType(
+              BuiltList, const [const FullType(MatchResultInfoEntity)]),
+          () => new ListBuilder<MatchResultInfoEntity>())
       ..addBuilderFactory(
           const FullType(
               BuiltList, const [const FullType(MatchResultInfoEntity)]),
